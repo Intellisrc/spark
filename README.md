@@ -66,17 +66,6 @@ Improvements:
 * Set custom session store (perwendel#1173)
 * Allow configuring endpointIdentificationAlgorithm for jetty SSL (perwendel#1153)
 
-## Release 3
-
-Bug fixes:
-* Fixed GZip content-length problem - Issue: perwendel/spark/issues/1157 (also #459, #742 and #937)
-
-Improvements:
-* Added additional mime types (like 'video/mp4') - Issue: perwendel/spark/issues/997
-* Allow to override or add mime types (see below)
-* Added `brotli` compression support (additionally to GZip) (see below)
-* Regex support in paths (see below)
-
 ----------------------------------------
 
 # About Spark (official build)
