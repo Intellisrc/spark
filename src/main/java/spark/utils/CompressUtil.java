@@ -51,6 +51,19 @@ public class CompressUtil {
 
     private static final String GZIP = "gzip";
     private static final String BROTLI = "br";
+
+    private static final boolean IS_BROTLI_AVAILABLE;
+    static {
+        boolean available = false;
+        try {
+            Class<?> brotli = Class.forName("com.aayushatharva.brotli4j.Brotli4jLoader");
+            available = (Boolean) brotli.getMethod("isAvailable").invoke(null);
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
+                 InvocationTargetException e) {
+            LOG.debug("Brotli was not found: {} Cause: {}", e.getMessage(), e.getCause());
+        }
+        IS_BROTLI_AVAILABLE = available;
+    }
     // Hide constructor
     private CompressUtil() {}
 
@@ -83,7 +96,7 @@ public class CompressUtil {
     }
     /**
      * Checks if the HTTP request/response accepts and wants to compress outputStream and i that case wraps the response output stream in a
-     * {@link java.util.zip.GZIPOutputStream} or 'com.nixxcode.jvmbrotli.enc.BrotliOutputStream'.
+     * {@link java.util.zip.GZIPOutputStream} or 'com.aayushatharva.brotli4j.encoder.BrotliOutputStream'.
      *
      * @param httpRequest        the HTTP servlet request.
      * @param httpResponse       the HTTP servlet response.
@@ -175,15 +188,7 @@ public class CompressUtil {
      * @return true if brotli is available
      */
     public static boolean isBrotliAvailable() {
-        boolean available = false;
-        try {
-            Class<?> brotli = Class.forName("com.nixxcode.jvmbrotli.common.BrotliLoader");
-            available = (Boolean) brotli.getMethod("isBrotliAvailable").invoke(null);
-        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
-                 InvocationTargetException e) {
-            LOG.debug("Brotli was not found: {} Cause: {}", e.getMessage(), e.getCause());
-        }
-        return available;
+        return IS_BROTLI_AVAILABLE;
     }
 
     /**
@@ -199,8 +204,8 @@ public class CompressUtil {
         if (q <= 0) q = 10;
         if (q > 11) q = 11;
         try {
-            Class<?> brotliOutputStream = Class.forName("com.nixxcode.jvmbrotli.enc.BrotliOutputStream");
-            Class<?> encoderParams = Class.forName("com.nixxcode.jvmbrotli.enc.Encoder$Parameters");
+            Class<?> brotliOutputStream = Class.forName("com.aayushatharva.brotli4j.encoder.BrotliOutputStream");
+            Class<?> encoderParams = Class.forName("com.aayushatharva.brotli4j.encoder.Encoder$Parameters");
             Object encoderParamsInstance = encoderParams.getDeclaredConstructor().newInstance();
             Object params = encoderParams.getMethod("setQuality", int.class).invoke(encoderParamsInstance, q);
             responseStream = (OutputStream) brotliOutputStream.getConstructor(OutputStream.class, encoderParams)

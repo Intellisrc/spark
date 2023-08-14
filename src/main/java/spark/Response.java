@@ -50,7 +50,7 @@ public class Response {
         GZIP_COMPRESSED,
         // It will request Spark to compress the output (brotli) and set the BROTLI header
         // NOTE: Brotli is a successor to gzip, it is supported by all major web browsers. It provides better compression than gzip.
-        // Brotli Library is included with `com.nixxcode.jvmbrotli` library
+        // Brotli Library is included with `com.aayushatharva.brotli4j` library
         BROTLI_COMPRESS,
         // It will notify Spark that the output is already BROTLI compressed.
         // In such case, Spark won't compress the output and will ensure the BROTLI header is set.

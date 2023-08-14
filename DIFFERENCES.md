@@ -114,7 +114,7 @@ Additional to `GZip`, this version includes [Brotli](https://en.wikipedia.org/wi
 which is [widely supported](https://caniuse.com/brotli) by modern browsers.
 
 In order to use this compression you will need first to add the 
-[com.nixxcode.jvmbrotli](https://mvnrepository.com/artifact/com.nixxcode.jvmbrotli) dependency 
+[com.aayushatharva.brotli4j](https://mvnrepository.com/artifact/com.aayushatharva.brotli4j) dependency
 in your project (Gradle, Maven, etc). 
 
 **NOTE**: If you are using Gradle, you may need to also include the native library according to your

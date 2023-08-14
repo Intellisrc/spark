@@ -8,7 +8,7 @@ import java.util.zip.GZIPInputStream;
 
 import spark.utils.IOUtils;
 
-import com.nixxcode.jvmbrotli.dec.BrotliInputStream;
+import com.aayushatharva.brotli4j.decoder.BrotliInputStream;
 
 /**
  * Created by A.Lepe (2022-07-27) based on GzipClient

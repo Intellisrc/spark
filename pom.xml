@@ -194,9 +194,9 @@
 
         <!-- SPARK DEPENDENCIES -->
         <dependency>
-            <groupId>com.nixxcode.jvmbrotli</groupId>
-            <artifactId>jvmbrotli</artifactId>
-            <version>0.2.0</version>
+            <groupId>com.aayushatharva.brotli4j</groupId>
+            <artifactId>brotli4j</artifactId>
+            <version>1.12.0</version>
             <optional>true</optional>
         </dependency>
     </dependencies>
